@@ -1,5 +1,4 @@
 import os
-import json
 import urllib.request
 
 import onnxruntime as ort
@@ -7,10 +6,10 @@ import numpy as np
 
 _MODEL_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "model")
 _MODEL_PATH = os.path.join(_MODEL_DIR, "mobilenetv2.onnx")
-_LABELS_PATH = os.path.join(_MODEL_DIR, "imagenet_labels.json")
+_LABELS_PATH = os.path.join(_MODEL_DIR, "imagenet_labels.txt")
 
 _MODEL_URL = "https://github.com/onnx/models/raw/main/validated/vision/classification/mobilenet/model/mobilenetv2-7.onnx"
-_LABELS_URL = "https://raw.githubusercontent.com/onnx/models/main/validated/vision/classification/mobilenet/labels/imagenet_simple_labels.json"
+_LABELS_URL = "https://raw.githubusercontent.com/pytorch/hub/master/imagenet_classes.txt"
 
 _session = None
 _labels = None
@@ -29,7 +28,7 @@ def _load_session():
         _download(_LABELS_URL, _LABELS_PATH)
         _session = ort.InferenceSession(_MODEL_PATH, providers=["CPUExecutionProvider"])
         with open(_LABELS_PATH, "r", encoding="utf-8") as f:
-            _labels = json.load(f)
+            _labels = [line.strip() for line in f if line.strip()]
     return _session
 
 
