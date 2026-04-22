@@ -68,7 +68,7 @@ Open your browser and navigate to `http://localhost:5000`
 
 ## Author
 
-**Tarsariya Sahil Devshibhai** (Sahil_1*)
+**Tarsariya Sahil Devshibhai** (Sahil_1\*)
 
 - Email: sahiltarsariya1@gmail.com
 - GitHub: [tarsariyasahil](https://github.com/tarsariyasahil)
